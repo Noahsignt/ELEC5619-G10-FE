@@ -13,11 +13,11 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
 const testObj = [
-    {name: "Literature", week: 1, link: "/literature", finished: true},
-    {name: "Early Life", week: 2, link: "/literature", finished: true},
-    {name: "First Works", week: 3, link: "/literature", finished: false},
-    {name: "Career", week: 4, link: "/literature", finished: false},
-    {name: "Legacy", week: 5, link: "/literature", finished: false}
+    {name: "Literature", week: 1, link: "/weekone", finished: true},
+    {name: "Early Life", week: 2, link: "/weekone", finished: true},
+    {name: "First Works", week: 3, link: "/weekone", finished: false},
+    {name: "Career", week: 4, link: "/weekone", finished: false},
+    {name: "Legacy", week: 5, link: "/weekone", finished: false}
 ]
 
 const TimelineObj = ({link, week, name, finished}) => {
