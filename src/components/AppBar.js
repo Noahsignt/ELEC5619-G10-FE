@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 export default function TopAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'inherit'}} sx={{ flexGrow:1 }}>

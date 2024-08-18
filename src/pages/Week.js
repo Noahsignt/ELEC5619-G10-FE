@@ -40,13 +40,6 @@ const testObj = [
     }
 ]
 
-const typeColourMapping = {
-    'notes': '#a1a1a1',
-    'quiz': '#1976d2',
-    'exercise': '#66bb6a',
-    'flashcards': '#d4e157'
-}
-
 const lightenColour = (hex, amount = 0.4) => {
     hex = hex.replace('#', '');
     let r = parseInt(hex.substring(0, 2), 16);
@@ -73,15 +66,17 @@ params:
     id: number (TODO: randomly generate and sync up with the db so that tasks can be correctly completed)
 */
 const TaskAccordion = ({type, completed, title, description, id }) => {
+    const colour =  completed ? '#95bb72' : '#ffa652';
+
     return (
-    <Accordion sx={{backgroundColor: typeColourMapping[type]}}>
+    <Accordion sx={{backgroundColor: colour}}>
         <AccordionSummary
           expandIcon={<ArrowDownwardIcon />}
           id={id}
         >
-          <Typography>{title}</Typography>
+          <Typography><strong>{type.charAt(0).toUpperCase() + type.slice(1)}: </strong>{title}</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{backgroundColor: lightenColour(typeColourMapping[type])}}>
+        <AccordionDetails sx={{backgroundColor: lightenColour(colour)}}>
           <Typography>
             {description}
           </Typography>
@@ -94,16 +89,28 @@ export default function Week() {
     return (
         <main>
             <TopAppBar />
-            <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-                {testObj.map((e) => {
-                    return (
-                        <Grid item xs={4}>
-                            <TaskAccordion type={e.type} completed={e.completed} title={e.title} description={e.description} id={e.id} />
-                        </Grid>
-                    )
-                })}
-            </Grid>
+            <Box sx={{ 
+                flexGrow: 1, 
+                display: 'flex', 
+                flexDirection: 'column',
+                alignItems: 'center',
+                paddingTop: '64px'
+                }}>
+                <Typography variant='h3'>
+                    Shakespeare
+                </Typography>
+                <Typography variant='h4'>
+                    Week One
+                </Typography>
+                <Grid container spacing={2} sx={{padding: '64px 64px 0 64px'}}>
+                    {testObj.map((e) => {
+                        return (
+                            <Grid item xs={4}>
+                                <TaskAccordion type={e.type} completed={e.completed} title={e.title} description={e.description} id={e.id} />
+                            </Grid>
+                        )
+                    })}
+                </Grid>
             </Box>
         </main>
     );
