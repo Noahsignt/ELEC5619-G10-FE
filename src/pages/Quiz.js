@@ -79,6 +79,25 @@ const QuestionBox = ({ onClick, question, answers, correct }) => {
     );
   };
 
+const ScoreDisplay = ({score}) => {
+    if(score === -1) {
+        return null
+    }
+
+    const colour = score < 80 ? score < 50 ? 'red' : 'orange' : 'green';
+
+    return (
+        <Box sx={{ display: 'flex', alignItems: 'center', padding: '6px', borderRadius: 1, backgroundColor: colour, }}>
+          <Typography variant="body1" sx={{ color: 'white', fontWeight: 'bold', marginRight: 1 }}>
+            Score:
+          </Typography>
+          <Typography variant="body1" sx={{ color: 'white'}}>
+            {score}%
+          </Typography>
+        </Box>
+      );
+}
+
 /*
     quiz represented as an array of current answers (-1, 0, 1, 2, 3)
         -1 means no answer yet
@@ -86,6 +105,7 @@ const QuestionBox = ({ onClick, question, answers, correct }) => {
 */
 export default function Quiz() {
     const [answers, setAnswers] = useState(Array(testObj.length).fill(-1))
+    const [score, setScore] = useState(-1);
 
     const onAnswer = (objIdx, answerIdx) => {
         const newAnswers = [...answers]
@@ -93,7 +113,7 @@ export default function Quiz() {
         setAnswers(newAnswers)
     }
 
-    const onSubmit = () => {
+    const onSubmit = () => {    
         //calculate percentage correct on this quiz
         let total = 0
 
@@ -104,7 +124,7 @@ export default function Quiz() {
             total += ansOne == ansTwo ? 1 : 0
         }
 
-        console.log(total/answers.length);
+        setScore((total/answers.length) * 100);
     }
 
     return (
@@ -126,9 +146,12 @@ export default function Quiz() {
                             <QuestionBox onClick={(answerIdx) => onAnswer(idx, answerIdx)} question={e.question} answers={[e.a, e.b, e.c, e.d]} correct={e.correct}/>
                         )
                     })}
-                <Button variant="contained" onSubmit={onSubmit()} sx={{marginBottom:'32px'}}>
-                    Submit
-                </Button>
+                <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom:'32px', gap: '16px'}}>
+                    <Button variant="contained" onClick={onSubmit}>
+                        Submit
+                    </Button>
+                    <ScoreDisplay score={score} />
+                </Box>
             </Box>
         </main>
     );
