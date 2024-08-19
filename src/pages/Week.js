@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TopAppBar from '../components/AppBar';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -8,6 +8,11 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { Button, Menu, MenuItem } from '@mui/material';
+import NotesIcon from '@mui/icons-material/Notes';
+import QuizIcon from '@mui/icons-material/Quiz';
+import CreateIcon from '@mui/icons-material/Create';
+import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
 
 const testObj = [
     {
@@ -78,12 +83,70 @@ const TaskAccordion = ({type, completed, title, description, id }) => {
         </AccordionSummary>
         <AccordionDetails sx={{backgroundColor: lightenColour(colour)}}>
           <Typography>
-            {description}
+            {description} <u><strong>Go Now</strong></u>
           </Typography>
         </AccordionDetails>
     </Accordion>
     )
 }
+
+const NewTaskButton = () => {
+    const [anchorEl, setAnchorEl] = useState(null);
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+  
+    return (
+      <div>
+        <Button
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+          variant="contained"
+          color="primary"
+        >
+          New Task
+        </Button>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
+                Notes
+                <NotesIcon sx={{ ml: 1 }} />
+            </Box>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                Quiz
+                <QuizIcon sx={{ ml: 1 }} />
+            </Box>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                Exercise
+                <CreateIcon sx={{ ml: 1 }} />
+            </Box>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                Flashcards
+                <ViewCarouselIcon sx={{ ml: 1 }} />
+            </Box>
+            </MenuItem>
+        </Menu>
+      </div>
+    );
+  };
 
 export default function Week() {
     return (
@@ -110,6 +173,9 @@ export default function Week() {
                             </Grid>
                         )
                     })}
+                    <Grid item xs={4} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        <NewTaskButton />
+                    </Grid>
                 </Grid>
             </Box>
         </main>

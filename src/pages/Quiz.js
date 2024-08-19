@@ -35,14 +35,6 @@ const testObj = [
         d: 'Edmund Spenser',
         correct: 0
     },
-    {
-        question: 'Who is known as the "Father of English Literature"?',
-        a: 'William Shakespeare',
-        b: 'Geoffrey Chaucer',
-        c: 'John Milton',
-        d: 'Edmund Spenser',
-        correct: 0
-    },
 ]
 
 /*
