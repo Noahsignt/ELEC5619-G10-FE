@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Course from './pages/Course';
 import Home from './pages/Home';
 import Week from './pages/Week';
+import Quiz from './pages/Quiz';
 import './App.css'
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/course" element={<Course />} />
       <Route path="/weekone" element={<Week />} />
-    </Routes>
+      <Route path="/quiz" element={<Quiz />} />
+     </Routes>
   );
 }
