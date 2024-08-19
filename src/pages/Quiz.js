@@ -93,6 +93,28 @@ const QuestionBox = ({ onClick, question, answers, correct }) => {
     compare answers to submitted object on form submission
 */
 export default function Quiz() {
+    const [answers, setAnswers] = useState(Array(testObj.length).fill(-1))
+
+    const onAnswer = (objIdx, answerIdx) => {
+        const newAnswers = [...answers]
+        newAnswers[objIdx] = answerIdx
+        setAnswers(newAnswers)
+    }
+
+    const onSubmit = () => {
+        //calculate percentage correct on this quiz
+        let total = 0
+
+        for(let i = 0; i < answers.length; i++){
+            const ansOne = answers[i]
+            const ansTwo = testObj[i].correct
+
+            total += ansOne == ansTwo ? 1 : 0
+        }
+
+        console.log(total/answers.length);
+    }
+
     return (
         <main>
             <TopAppBar />
@@ -107,11 +129,14 @@ export default function Quiz() {
                 paddingTop: '32px',
                 gap: '32px'
                 }}>
-                    {testObj.map((e) => {
+                    {testObj.map((e, idx) => {
                         return (
-                            <QuestionBox onClick={() => {}} question={e.question} answers={[e.a, e.b, e.c, e.d]} correct={e.correct}/>
+                            <QuestionBox onClick={(answerIdx) => onAnswer(idx, answerIdx)} question={e.question} answers={[e.a, e.b, e.c, e.d]} correct={e.correct}/>
                         )
                     })}
+                <Button variant="contained" onSubmit={onSubmit()} sx={{marginBottom:'32px'}}>
+                    Submit
+                </Button>
             </Box>
         </main>
     );
