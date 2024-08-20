@@ -8,6 +8,7 @@ import Week from './pages/Week';
 import Quiz from './pages/Quiz';
 import Friends from './pages/Friends';
 import Notes from './pages/Notes';
+import Flashcards from './pages/Flashcards'
 import './App.css'
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
       <Route path="/newtopic" element={<NewTopic />} /> 
       <Route path="/friends" element={<Friends />} /> 
       <Route path="/notes" element={<Notes />} />
+      <Route path="/flashcards" element={<Flashcards />} />
     </Routes>
   );
 }
