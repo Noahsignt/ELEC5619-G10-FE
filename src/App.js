@@ -6,6 +6,7 @@ import NewTopic from './pages/NewTopic';
 import Home from './pages/Home';
 import Week from './pages/Week';
 import Quiz from './pages/Quiz';
+import Friends from './pages/Friends';
 import './App.css'
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/weekone" element={<Week />} />
       <Route path="/quiz" element={<Quiz />} />
       <Route path="/newtopic" element={<NewTopic />} /> 
+      <Route path="/friends" element={<Friends />} /> 
     </Routes>
   );
 }
