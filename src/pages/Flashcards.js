@@ -93,8 +93,8 @@ export default function Flashcards() {
                 </IconButton>
             </Box>
             <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white',}}>
-                <PriorityHighIcon sx={{ backgroundColor: 'green', paddingTop: 2, paddingBottom: 2, paddingLeft: 2, borderTopLeftRadius: 4, borderBottomLeftRadius: 4}}/>
-                <Typography sx={{ backgroundColor: 'green', paddingTop: 2, paddingBottom: 2, paddingRight: 2, borderTopRightRadius: 4, borderBottomRightRadius: 4}}>
+                <PriorityHighIcon sx={{ backgroundColor: 'warning.dark', paddingTop: 2, paddingBottom: 2, paddingLeft: 2, borderTopLeftRadius: 4, borderBottomLeftRadius: 4}}/>
+                <Typography sx={{ backgroundColor: 'warning.dark', paddingTop: 2, paddingBottom: 2, paddingRight: 2, borderTopRightRadius: 4, borderBottomRightRadius: 4}}>
                     Click on the card to flip it and click the arrows to navigate through your flashcards.
                 </Typography>
             </Box>

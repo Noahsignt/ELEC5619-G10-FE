@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TopAppBar from '../components/AppBar';
 import { Box, Typography, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button } from '@mui/material';
+import WarningIcon from '@mui/icons-material/Warning';
 
 const testObj = [
     {
@@ -44,8 +45,10 @@ const testObj = [
         question: a string representing the question
         answers: an array of 4 strings representing possible answers
         correct: an index (0 <= idx <= 3) representing the correct answer
+        hasSubmitted: boolean based on if answer has been submitted or not
+        helpString: string to be shown against incorrect answers if hasSubmitted is true
 */
-const QuestionBox = ({ onClick, question, answers, correct }) => {
+const QuestionBox = ({ onClick, question, answers, correct, hasSubmitted, helpString }) => {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     
     const handleSelection = (event) => {
@@ -66,12 +69,22 @@ const QuestionBox = ({ onClick, question, answers, correct }) => {
             onChange={handleSelection}
           >
             {answers.map((answer, index) => (
-              <FormControlLabel 
-                key={index} 
-                value={index} 
-                control={<Radio />} 
-                label={answer} 
-              />
+              <Box sx={{display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 2}}>
+                <FormControlLabel 
+                  key={index} 
+                  value={index} 
+                  control={<Radio />} 
+                  label={answer} 
+                />
+                {hasSubmitted && selectedAnswer != correct && selectedAnswer === index &&
+                <Box sx={{display: 'flex', gap: 1, backgroundColor: 'error.main', paddingLeft: 1, paddingRight: 2, borderRadius: 1}}>
+                  <WarningIcon sx={{color: 'white'}} /> 
+                  <Typography sx={{color: 'white'}}>
+                    {helpString}
+                  </Typography>
+                </Box>
+                }
+              </Box>
             ))}
           </RadioGroup>
         </FormControl>
@@ -143,7 +156,12 @@ export default function Quiz() {
                 }}>
                     {testObj.map((e, idx) => {
                         return (
-                            <QuestionBox onClick={(answerIdx) => onAnswer(idx, answerIdx)} question={e.question} answers={[e.a, e.b, e.c, e.d]} correct={e.correct}/>
+                            <QuestionBox onClick={(answerIdx) => onAnswer(idx, answerIdx)} 
+                              question={e.question} 
+                              answers={[e.a, e.b, e.c, e.d]} 
+                              correct={e.correct}
+                              hasSubmitted={score != -1}
+                              helpString="William Shakespeare is typically considered the 'Father of English Literature'"/>
                         )
                     })}
                 <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom:'32px', gap: '16px'}}>
