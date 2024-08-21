@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import TopAppBar from '../components/AppBar'
 import { Box, TextField, Button, Typography } from '@mui/material'
 import SmartToyIcon from '@mui/icons-material/SmartToy';
+import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
 
 export default function NewTopic() {
+    const [weeks, setWeeks] = useState(0);
     const [topic, setTopic] = useState("");
     const [topicStatus, setTopicStatus] = useState(0);
 
@@ -46,7 +48,10 @@ export default function NewTopic() {
             <Typography variant="h6" align="center" width="50vw">
                 Unlock the power of AI! Enter a topic you want to be taught on, and let our intelligent system guide you.
             </Typography>
-            <TextField id="outlined-basic" onChange={(e) => setTopic(e.target.value)} label="Enter topic here..." variant="outlined" />
+            <Box sx={{display: 'flex', gap: 4}}>
+                <TextField id="outlined-basic" onChange={(e) => setTopic(e.target.value)} label="Enter topic here..." variant="outlined" />
+                <TextField inputProps={{ type: 'number'}} label="Number of Weeks" onChange={(e) => setWeeks(e.target.value)}/>
+            </Box>
             <Button onClick={onClick} variant="contained">Generate</Button>
             {topicStatus !== 0 &&
                 <Box sx={{backgroundColor: topicStatusMapping[topicStatus].color, padding: 2, borderRadius: 1}}>
